@@ -126,50 +126,6 @@
             background-color: #6b21ff; color: white; border: none; padding: 0 30px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s;
         }
 
-        /* TOMBOL TOOLS TAMBAHAN (YOUTUBE, FB, X) */
-        .partner-tools-container {
-            text-align: center;
-            margin: 35px auto 40px auto;
-            padding: 0 20px;
-            max-width: 900px;
-        }
-        .tools-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-        .tool-btn {
-            background-color: #e6f4ea;
-            color: #111;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
-            transition: 0.2s;
-            border: 1px solid #d4ebd9;
-        }
-        .tool-btn:hover {
-            background-color: #d4ebd9;
-        }
-        .tool-icon {
-            width: 28px;
-            height: 28px;
-            color: white;
-            border-radius: 6px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        .tool-icon.yt { background-color: #ff0000; }
-        .tool-icon.fb { background-color: #1877f2; font-size: 18px; font-family: serif; }
-        .tool-icon.x { background-color: #000000; font-size: 16px; }
-
         /* AREA HASIL DOWNLOAD */
         #result {
             display: none; max-width: 500px; margin: -30px auto 40px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 10;
@@ -234,26 +190,6 @@
         </div>
     </div>
 
-    <div class="partner-tools-container">
-        <div class="tools-grid">
-            <a href="youtube-mp4.html" target="_blank" class="tool-btn">
-                <div class="tool-icon yt">▶</div>
-                YouTube MP4
-            </a>
-            <a href="youtube-mp3.html" target="_blank" class="tool-btn">
-                <div class="tool-icon yt">🎵</div>
-                YouTube MP3
-            </a>
-            <a href="twitter.html" target="_blank" class="tool-btn">
-                <div class="tool-icon x">𝕏</div>
-                X Twitter
-            </a>
-            <a href="facebook.html" target="_blank" class="tool-btn">
-                <div class="tool-icon fb">f</div>
-                Facebook MP4
-            </a>
-        </div>
-    </div>
     <div id="result">
         <img id="thumb" src="" alt="Thumbnail">
         <p id="title">Video Title</p>
@@ -261,6 +197,7 @@
         <a id="downloadMp3" href="" target="_blank" class="btn-result" style="background:#444;" data-i18n="resMp3">Unduh MP3 / Audio</a>
     </div>
 
+    <!-- ===== TEMPAT IKLAN BANNER (160x300) ===== -->
     <div style="text-align: center; margin: 30px auto; display: flex; justify-content: center;">
         <script>
             atOptions = {
@@ -273,6 +210,8 @@
         </script>
         <script src="https://www.highperformanceformat.com/bcad03aad9a659e4601d2270cebb6fb0/invoke.js"></script>
     </div>
+    <!-- ========================================= -->
+
     <div class="features-3col">
         <div>
             <h3 data-i18n="feat1Title">Akses Tanpa Batas</h3>
@@ -300,6 +239,7 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <footer style="text-align: center; padding: 30px 10px; margin-top: 40px; font-size: 14px; color: #6b7280; border-top: 1px solid #e5e7eb;">
         <p>&copy; 2026 TOKSAVE. All rights reserved.</p>
         <p>
@@ -319,7 +259,7 @@
                 feat2Title: "Unduh Tanpa Watermark", feat2Desc: "Simpan video dengan mudah, bebas logo TT.",
                 feat3Title: "MP4 & MP3 HD", feat3Desc: "Tersedia format MP4 resolusi tinggi dan MP3.",
                 howToTitle: "Cara Unduh Video HD", howToSub: "Unduh gratis dan cepat!",
-                step1Title: "Temukan Video", step1Desc: "Buka aplikasi TikTok and cari videonya.",
+                step1Title: "Temukan Video", step1Desc: "Buka aplikasi TikTok dan cari videonya.",
                 step2Title: "Salin Tautan", step2Desc: "Klik bagikan lalu salin tautan.",
                 step3Title: "Download", step3Desc: "Tempel di TokSave dan klik download.",
                 alertEmpty: "Silakan tempelkan tautan video TikTok!", alertSearch: "Mencari... ⏳", alertFail: "Gagal menemukan video.", alertError: "Terjadi kesalahan server."
@@ -480,6 +420,9 @@
         }
     </script>
 
+    <!-- ===== SCRIPT IKLAN JS TAMBAHAN ===== -->
     <script src="https://pl29904731.effectivecpmnetwork.com/2a/cc/78/2acc783c1468717d402f4f2b18ca2787.js"></script>
-    </body>
+    <!-- ==================================== -->
+
+</body>
 </html>
