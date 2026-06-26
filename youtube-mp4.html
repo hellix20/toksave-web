@@ -7,7 +7,6 @@
     <title>TOKSAVE - Download Video YouTube MP4</title>
     
     <style>
-        /* PENGATURAN DASAR */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f4f6;
@@ -37,7 +36,8 @@
         .nav-links { display: flex; gap: 30px; }
         .nav-links a { text-decoration: none; color: #444; font-weight: 500; }
         .nav-right-group { display: flex; align-items: center; gap: 10px; }
-        .lang-picker { padding: 8px; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; }
+        .lang-picker { padding: 8px; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; background-color: white; font-family: inherit; }
+        .btn-install { background-color: #ff0000; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
         .hero {
             background: linear-gradient(135deg, #cc0000 0%, #ff4d4d 100%);
@@ -51,12 +51,8 @@
         }
         .input-group input { flex: 1; border: none; padding: 15px; font-size: 16px; outline: none; background: transparent; color: #333; }
         .btn-paste { background-color: white; color: #ff0000; border: 1px solid #ddd; padding: 0 15px; margin: 0 8px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .btn-download-main { background-color: #ff0000; color: white; border: none; padding: 0 30px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; }
-
-        #iframe-container {
-            display: none; max-width: 800px; margin: -30px auto 40px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 10;
-        }
-        iframe { width: 100%; height: 80px; border: none; border-radius: 8px; overflow: hidden; }
+        .btn-download-main { background-color: #ff0000; color: white; border: none; padding: 0 30px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        .btn-download-main:hover { background-color: #cc0000; }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
@@ -79,6 +75,9 @@
                 <option value="en">🇺🇸 EN</option>
                 <option value="ar">🇸🇦 AR</option>
             </select>
+            <button class="btn-install">
+                ⬇ <span data-i18n="btnInstall">Instal aplikasi</span>
+            </button>
         </div>
     </div>
 
@@ -87,16 +86,16 @@
         <div class="input-group">
             <input type="text" id="linkInput" data-i18n-placeholder="inputPlaceholder" placeholder="Tempel tautan YouTube di sini">
             <button class="btn-paste" onclick="pasteClipboard()" data-i18n="btnPaste">📋 Tempel</button>
-            <button class="btn-download-main" id="searchBtn" onclick="klikTombolUtama()" data-i18n="btnDownload">Download</button>
+            <button class="btn-download-main" id="searchBtn" onclick="klikTombolUtama()" data-i18n="btnDownload">Download Video MP4</button>
         </div>
     </div>
 
-    <div id="iframe-container">
-        <h3 style="margin-top:0;" data-i18n="resTitle">Silakan klik tombol di bawah ini:</h3>
-        <iframe id="downloadWidget" src="" allowtransparency="true" scrolling="no"></iframe>
+    <div id="result-container" style="display: none; max-width: 500px; margin: -30px auto 40px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 10;">
+        <h3 style="margin-top:0;" data-i18n="resTitle">Silakan unduh video:</h3>
+        <div id="resultThumb"></div> <p id="resultTitle" style="color: #333; font-size: 14px; margin-bottom: 15px; font-weight: bold;">Judul Video</p>
+        <a id="resultDownloadBtn" href="#" target="_blank" style="display: block; background-color: #ff0000; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 10px;" data-i18n="btnDownload">Download Video MP4</a>
     </div>
 
-    <!-- ===== TEMPAT IKLAN BANNER (160x300) ===== -->
     <div style="text-align: center; margin: 30px auto; display: flex; justify-content: center;">
         <script>
             atOptions = {
@@ -109,39 +108,41 @@
         </script>
         <script src="https://www.highperformanceformat.com/bcad03aad9a659e4601d2270cebb6fb0/invoke.js"></script>
     </div>
-    <!-- ========================================= -->
 
     <footer style="text-align: center; padding: 30px 10px; margin-top: 40px; font-size: 14px; color: #6b7280; border-top: 1px solid #e5e7eb;">
-        <p>&copy; 2026 TOKSAVE.</p>
+        <p>&copy; 2026 TOKSAVE. All rights reserved.</p>
     </footer>
 
     <script>
         const kamus = {
             id: {
                 navBack: "⬅ Kembali ke Beranda TikTok",
+                btnInstall: "Instal aplikasi",
                 heroTitle: "Download Video YouTube MP4",
                 inputPlaceholder: "Tempel tautan YouTube di sini",
                 btnPaste: "📋 Tempel",
-                btnDownload: "Download",
-                resTitle: "Silakan klik tombol di bawah ini:",
+                btnDownload: "Download Video MP4", 
+                resTitle: "Silakan unduh video:",
                 alertEmpty: "Silakan tempelkan tautan video YouTube!"
             },
             en: {
                 navBack: "⬅ Back to TikTok Home",
+                btnInstall: "Install App",
                 heroTitle: "Download YouTube MP4 Videos",
                 inputPlaceholder: "Paste YouTube link here",
                 btnPaste: "📋 Paste",
-                btnDownload: "Download",
-                resTitle: "Please click the button below:",
+                btnDownload: "Download MP4 Video", 
+                resTitle: "Please download the video:",
                 alertEmpty: "Please paste the YouTube video link!"
             },
             ar: {
                 navBack: "⬅ العودة إلى الصفحة الرئيسية لتيك توك",
+                btnInstall: "تثبيت التطبيق",
                 heroTitle: "تنزيل فيديو يوتيوب MP4",
                 inputPlaceholder: "الصق رابط يوتيوب هنا",
                 btnPaste: "📋 لصق",
-                btnDownload: "تنزيل",
-                resTitle: "الرجاء النقر فوق الزر أدناه:",
+                btnDownload: "تنزيل فيديو MP4", 
+                resTitle: "الرجاء تنزيل الفيديو:",
                 alertEmpty: "الرجاء لصق رابط فيديو يوتيوب!"
             }
         };
@@ -159,7 +160,6 @@
                 const key = el.getAttribute('data-i18n-placeholder');
                 if(kamus[lang][key]) el.placeholder = kamus[lang][key];
             });
-            document.title = "TOKSAVE - " + kamus[lang].heroTitle;
         }
 
         async function pasteClipboard() {
@@ -171,28 +171,48 @@
             }
         }
 
-        function klikTombolUtama() {
-            let link = document.getElementById('linkInput').value;
+        async function klikTombolUtama() {
+            const link = document.getElementById('linkInput').value;
             if (!link) {
                 alert(kamus[currentLang].alertEmpty);
                 return;
             }
             
-            // Popunder Iklan
             window.open('https://www.effectivecpmnetwork.com/ww60vgea?key=3ce187645bfa68bd5b10a5b293e2180b', '_blank');
 
-            // Cek apakah link mengandung kata youtu
-            if(link.includes('youtu')) {
-                // Menggunakan Loader.to API (Lebih stabil dan Anti-Ribet)
-                // f=mp4 artinya formatnya video mp4 (720p/1080p otomatis)
-                const iframeUrl = `https://loader.to/api/button/?url=${encodeURIComponent(link)}&f=mp4`;
-                document.getElementById('downloadWidget').src = iframeUrl;
-                
-                const resultDiv = document.getElementById('iframe-container');
-                resultDiv.style.display = 'block';
-                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                alert(currentLang === 'id' ? 'Link YouTube tidak valid!' : 'Invalid YouTube Link!');
+            const btn = document.getElementById('searchBtn');
+            const resultDiv = document.getElementById('result-container'); 
+            const videoThumb = document.getElementById('resultThumb'); 
+            const videoTitle = document.getElementById('resultTitle'); 
+            const downloadBtnLink = document.getElementById('resultDownloadBtn'); 
+
+            btn.innerText = currentLang === 'id' ? 'Memproses... ⏳' : 'Processing... ⏳';
+            btn.disabled = true;
+            resultDiv.style.display = 'none';
+            videoThumb.innerHTML = ''; 
+
+            try {
+                // MENGHUBUNGI FOLDER API YANG BARU LU BIKIN
+                const response = await fetch(`/api/youtube-download?url=${encodeURIComponent(link)}`);
+                const result = await response.json();
+
+                if (result.success) {
+                  const data = result.data;
+                  videoTitle.innerText = data.title;
+                  videoThumb.innerHTML = `<img src="${data.thumbnail}" alt="Thumbnail Video" style="width: 100%; border-radius: 8px; margin-bottom: 10px;">`;
+                  downloadBtnLink.href = data.downloadUrl;
+                  downloadBtnLink.innerText = `${kamus[currentLang].btnDownload} (${data.quality})`;
+                  
+                  resultDiv.style.display = 'block';
+                  resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                  alert(currentLang === 'id' ? `Gagal: ${result.error}` : `Error: ${result.error}`);
+                }
+            } catch (error) {
+                alert(currentLang === 'id' ? 'Terjadi kesalahan jaringan atau server.' : 'Network or server error occurred.');
+            } finally {
+                btn.innerText = kamus[currentLang].btnDownload;
+                btn.disabled = false;
             }
         }
     </script>
