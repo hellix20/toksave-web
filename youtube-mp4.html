@@ -7,6 +7,7 @@
     <title>TOKSAVE - Download Video YouTube MP4</title>
     
     <style>
+        /* PENGATURAN DASAR */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f4f6;
@@ -54,6 +55,10 @@
         .btn-download-main { background-color: #ff0000; color: white; border: none; padding: 0 30px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
         .btn-download-main:hover { background-color: #cc0000; }
 
+        #result-container {
+            display: none; max-width: 500px; margin: -30px auto 40px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 10;
+        }
+
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .input-group { flex-direction: column; background: transparent; box-shadow: none; }
@@ -90,10 +95,10 @@
         </div>
     </div>
 
-    <div id="result-container" style="display: none; max-width: 500px; margin: -30px auto 40px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 10;">
-        <h3 style="margin-top:0;" data-i18n="resTitle">Silakan unduh video:</h3>
-        <div id="resultThumb"></div> <p id="resultTitle" style="color: #333; font-size: 14px; margin-bottom: 15px; font-weight: bold;">Judul Video</p>
-        <a id="resultDownloadBtn" href="#" target="_blank" style="display: block; background-color: #ff0000; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 10px;" data-i18n="btnDownload">Download Video MP4</a>
+    <div id="result-container">
+        <div id="resultThumb"></div>
+        <p id="resultTitle" style="color: #333; font-size: 16px; margin-bottom: 15px; font-weight: bold;">Video Ditemukan!</p>
+        <a id="resultDownloadBtn" href="#" target="_blank" style="display: block; background-color: #ff0000; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 10px;" data-i18n="resDownload">Lanjutkan ke Halaman Unduh MP4</a>
     </div>
 
     <div style="text-align: center; margin: 30px auto; display: flex; justify-content: center;">
@@ -122,7 +127,8 @@
                 inputPlaceholder: "Tempel tautan YouTube di sini",
                 btnPaste: "📋 Tempel",
                 btnDownload: "Download Video MP4", 
-                resTitle: "Silakan unduh video:",
+                resTitle: "Video siap diunduh!",
+                resDownload: "Lanjutkan ke Halaman Unduh MP4",
                 alertEmpty: "Silakan tempelkan tautan video YouTube!"
             },
             en: {
@@ -132,7 +138,8 @@
                 inputPlaceholder: "Paste YouTube link here",
                 btnPaste: "📋 Paste",
                 btnDownload: "Download MP4 Video", 
-                resTitle: "Please download the video:",
+                resTitle: "Video is ready!",
+                resDownload: "Continue to MP4 Download Page",
                 alertEmpty: "Please paste the YouTube video link!"
             },
             ar: {
@@ -142,7 +149,8 @@
                 inputPlaceholder: "الصق رابط يوتيوب هنا",
                 btnPaste: "📋 لصق",
                 btnDownload: "تنزيل فيديو MP4", 
-                resTitle: "الرجاء تنزيل الفيديو:",
+                resTitle: "الفيديو جاهز!",
+                resDownload: "متابعة إلى صفحة تنزيل MP4",
                 alertEmpty: "الرجاء لصق رابط فيديو يوتيوب!"
             }
         };
@@ -171,13 +179,20 @@
             }
         }
 
-        async function klikTombolUtama() {
+        function extractVideoID(url) {
+            let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            let match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        function klikTombolUtama() {
             const link = document.getElementById('linkInput').value;
             if (!link) {
                 alert(kamus[currentLang].alertEmpty);
                 return;
             }
             
+            // Popunder iklan lu (Aman dan tetap narik duit)
             window.open('https://www.effectivecpmnetwork.com/ww60vgea?key=3ce187645bfa68bd5b10a5b293e2180b', '_blank');
 
             const btn = document.getElementById('searchBtn');
@@ -189,31 +204,30 @@
             btn.innerText = currentLang === 'id' ? 'Memproses... ⏳' : 'Processing... ⏳';
             btn.disabled = true;
             resultDiv.style.display = 'none';
-            videoThumb.innerHTML = ''; 
 
-            try {
-                // MENGHUBUNGI FOLDER API YANG BARU LU BIKIN
-                const response = await fetch(`/api/youtube-download?url=${encodeURIComponent(link)}`);
-                const result = await response.json();
-
-                if (result.success) {
-                  const data = result.data;
-                  videoTitle.innerText = data.title;
-                  videoThumb.innerHTML = `<img src="${data.thumbnail}" alt="Thumbnail Video" style="width: 100%; border-radius: 8px; margin-bottom: 10px;">`;
-                  downloadBtnLink.href = data.downloadUrl;
-                  downloadBtnLink.innerText = `${kamus[currentLang].btnDownload} (${data.quality})`;
-                  
-                  resultDiv.style.display = 'block';
-                  resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Proses instan tanpa server
+            setTimeout(() => {
+                let videoId = extractVideoID(link);
+                
+                if(videoId) {
+                    // Narik gambar thumbnail langsung dari server asli YouTube
+                    videoThumb.innerHTML = `<img src="https://img.youtube.com/vi/${videoId}/hqdefault.jpg" alt="Thumbnail Video" style="width: 100%; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd;">`;
+                    
+                    videoTitle.innerText = kamus[currentLang].resTitle;
+                    
+                    // Modifikasi link menuju server download pihak ketiga yang badak
+                    downloadBtnLink.href = `https://ssyoutube.com/watch?v=${videoId}`;
+                    downloadBtnLink.innerText = kamus[currentLang].resDownload;
+                    
+                    resultDiv.style.display = 'block';
+                    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
-                  alert(currentLang === 'id' ? `Gagal: ${result.error}` : `Error: ${result.error}`);
+                    alert(currentLang === 'id' ? 'Tautan YouTube tidak valid!' : 'Invalid YouTube link!');
                 }
-            } catch (error) {
-                alert(currentLang === 'id' ? 'Terjadi kesalahan jaringan atau server.' : 'Network or server error occurred.');
-            } finally {
+                
                 btn.innerText = kamus[currentLang].btnDownload;
                 btn.disabled = false;
-            }
+            }, 800);
         }
     </script>
 
