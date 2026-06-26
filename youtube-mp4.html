@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <link rel="icon" href="Logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOKSAVE - Download Video YouTube MP4</title>
+    
+    <style>
+        /* PENGATURAN DASAR (Sama persis dengan beranda) */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f4f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body[dir="rtl"] { text-align: right; }
+        body[dir="rtl"] .logo, body[dir="rtl"] .nav-right-group { flex-direction: row-reverse; }
+        body[dir="rtl"] .input-group { flex-direction: row-reverse; }
+
+        .navbar {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #111; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo span { background-color: #ff0000; color: white; padding: 4px 8px; border-radius: 4px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { text-decoration: none; color: #444; font-weight: 500; }
+        .nav-right-group { display: flex; align-items: center; gap: 10px; }
+        .lang-picker { padding: 8px; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; }
+        .btn-install { background-color: #ff0000; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+        .hero {
+            background: linear-gradient(135deg, #cc0000 0%, #ff4d4d 100%); /* Warna Merah YouTube */
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 { font-size: 36px; margin-bottom: 30px; }
+        .input-group {
+            background: white; max-width: 700px; margin: 0 auto; display: flex; padding: 8px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .input-group input { flex: 1; border: none; padding: 15px; font-size: 16px; outline: none; background: transparent; color: #333; }
+        .btn-paste { background-color: white; color: #ff0000; border: 1px solid #ddd; padding: 0 15px; margin: 0 8px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .btn-download-main { background-color: #ff0000; color: white; border: none; padding: 0 30px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; }
+
+        #iframe-container {
+            display: none; max-width: 800px; margin: -30px auto 40px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 10;
+        }
+        iframe { width: 100%; height: 250px; border: none; border-radius: 8px; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .input-group { flex-direction: column; background: transparent; box-shadow: none; }
+            .input-group input, .btn-paste, .btn-download-main { width: 100%; margin-bottom: 10px; padding: 15px; border-radius: 8px; box-sizing: border-box; }
+            .input-group input { background: white; margin-right: 0; margin-left: 0; }
+        }
+    </style>
+</head>
+<body dir="ltr">
+
+    <div class="navbar">
+        <a href="index.html" class="logo"><span>▶</span> TOKSAVE</a>
+        <div class="nav-links">
+            <a href="index.html" data-i18n="navBack">⬅ Kembali ke Beranda TikTok</a>
+        </div>
+        <div class="nav-right-group">
+            <select class="lang-picker" onchange="gantiBahasa(this.value)">
+                <option value="id">🇮🇩 ID</option>
+                <option value="en">🇺🇸 EN</option>
+                <option value="ar">🇸🇦 AR</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="hero">
+        <h1 data-i18n="heroTitle">Download Video YouTube MP4</h1>
+        <div class="input-group">
+            <input type="text" id="linkInput" data-i18n-placeholder="inputPlaceholder" placeholder="Tempel tautan YouTube di sini">
+            <button class="btn-paste" onclick="pasteClipboard()" data-i18n="btnPaste">📋 Tempel</button>
+            <button class="btn-download-main" id="searchBtn" onclick="klikTombolUtama()" data-i18n="btnDownload">Download</button>
+        </div>
+    </div>
+
+    <div id="iframe-container">
+        <h3 style="margin-top:0;" data-i18n="resTitle">Pilih Kualitas Video:</h3>
+        <iframe id="downloadWidget" src="" allowtransparency="true" scrolling="no"></iframe>
+    </div>
+
+    <div style="text-align: center; margin: 30px auto; display: flex; justify-content: center;">
+        <script>
+            atOptions = {
+                'key' : 'bcad03aad9a659e4601d2270cebb6fb0',
+                'format' : 'iframe',
+                'height' : 300,
+                'width' : 160,
+                'params' : {}
+            };
+        </script>
+        <script src="https://www.highperformanceformat.com/bcad03aad9a659e4601d2270cebb6fb0/invoke.js"></script>
+    </div>
+    <footer style="text-align: center; padding: 30px 10px; margin-top: 40px; font-size: 14px; color: #6b7280; border-top: 1px solid #e5e7eb;">
+        <p>&copy; 2026 TOKSAVE.</p>
+    </footer>
+
+    <script>
+        // Kamus Bahasa Sederhana
+        const kamus = {
+            id: {
+                navBack: "⬅ Kembali ke Beranda TikTok",
+                heroTitle: "Download Video YouTube MP4",
+                inputPlaceholder: "Tempel tautan YouTube di sini",
+                btnPaste: "📋 Tempel",
+                btnDownload: "Download",
+                resTitle: "Pilih Resolusi Video:",
+                alertEmpty: "Silakan tempelkan tautan video YouTube!"
+            },
+            en: {
+                navBack: "⬅ Back to TikTok Home",
+                heroTitle: "Download YouTube MP4 Videos",
+                inputPlaceholder: "Paste YouTube link here",
+                btnPaste: "📋 Paste",
+                btnDownload: "Download",
+                resTitle: "Choose Video Resolution:",
+                alertEmpty: "Please paste the YouTube video link!"
+            },
+            ar: {
+                navBack: "⬅ العودة إلى الصفحة الرئيسية لتيك توك",
+                heroTitle: "تنزيل فيديو يوتيوب MP4",
+                inputPlaceholder: "الصق رابط يوتيوب هنا",
+                btnPaste: "📋 لصق",
+                btnDownload: "تنزيل",
+                resTitle: "اختر دقة الفيديو:",
+                alertEmpty: "الرجاء لصق رابط فيديو يوتيوب!"
+            }
+        };
+
+        let currentLang = 'id';
+
+        function gantiBahasa(lang) {
+            currentLang = lang;
+            document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(kamus[lang][key]) el.innerHTML = kamus[lang][key];
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if(kamus[lang][key]) el.placeholder = kamus[lang][key];
+            });
+            document.title = "TOKSAVE - " + kamus[lang].heroTitle;
+        }
+
+        async function pasteClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById('linkInput').value = text;
+            } catch (err) {
+                alert('Gagal tempel / Failed to paste.');
+            }
+        }
+
+        function klikTombolUtama() {
+            let link = document.getElementById('linkInput').value;
+            if (!link) {
+                alert(kamus[currentLang].alertEmpty);
+                return;
+            }
+            
+            // Popunder Iklan Lu (Aman dan Tetap Jalan)
+            window.open('https://www.effectivecpmnetwork.com/ww60vgea?key=3ce187645bfa68bd5b10a5b293e2180b', '_blank');
+
+            // Ekstrak ID YouTube
+            let videoId = extractVideoID(link);
+            
+            if(videoId) {
+                // Memakai widget gratisan untuk memproses download
+                const iframeUrl = `https://api.vevioz.com/api/button/mp4/${videoId}`;
+                document.getElementById('downloadWidget').src = iframeUrl;
+                
+                const resultDiv = document.getElementById('iframe-container');
+                resultDiv.style.display = 'block';
+                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                alert(currentLang === 'id' ? 'Link YouTube tidak valid!' : 'Invalid YouTube Link!');
+            }
+        }
+
+        function extractVideoID(url) {
+            let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            let match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+    </script>
+
+    <script src="https://pl29904731.effectivecpmnetwork.com/2a/cc/78/2acc783c1468717d402f4f2b18ca2787.js"></script>
+
+</body>
+</html>
