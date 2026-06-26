@@ -19,6 +19,26 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        /* PENGATURAN BAHASA ARAB (Kanan ke Kiri) */
+        body[dir="rtl"] {
+            text-align: right;
+        }
+        body[dir="rtl"] .logo, body[dir="rtl"] .nav-right-group {
+            flex-direction: row-reverse;
+        }
+        body[dir="rtl"] .input-group {
+            flex-direction: row-reverse;
+        }
+        body[dir="rtl"] .how-to-box li {
+            padding-right: 40px;
+            padding-left: 0;
+        }
+        body[dir="rtl"] .how-to-box li::before {
+            right: 0;
+            left: auto;
         }
 
         /* NAVBAR / HEADER */
@@ -29,6 +49,8 @@
             align-items: center;
             padding: 15px 5%;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+            gap: 15px;
         }
         .logo {
             font-size: 24px;
@@ -53,8 +75,19 @@
             color: #444;
             font-weight: 500;
         }
-        .nav-links a:hover {
-            color: #6b21ff;
+        .nav-right-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .lang-picker {
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: white;
+            outline: none;
         }
         .btn-install {
             background-color: #6b21ff;
@@ -73,10 +106,7 @@
             text-align: center;
             color: white;
         }
-        .hero h1 {
-            font-size: 36px;
-            margin-bottom: 30px;
-        }
+        .hero h1 { font-size: 36px; margin-bottom: 30px; }
         .input-group {
             background: white;
             max-width: 700px;
@@ -87,257 +117,87 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
         .input-group input {
-            flex: 1;
-            border: none;
-            padding: 15px;
-            font-size: 16px;
-            outline: none;
-            background: transparent;
-            color: #333;
+            flex: 1; border: none; padding: 15px; font-size: 16px; outline: none; background: transparent; color: #333;
         }
         .btn-paste {
-            background-color: white;
-            color: #6b21ff;
-            border: 1px solid #ddd;
-            padding: 0 15px;
-            margin-right: 8px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            background-color: white; color: #6b21ff; border: 1px solid #ddd; padding: 0 15px; margin: 0 8px; border-radius: 8px; font-weight: bold; cursor: pointer;
         }
         .btn-download-main {
-            background-color: #6b21ff;
-            color: white;
-            border: none;
-            padding: 0 30px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-download-main:hover {
-            background-color: #5118c7;
+            background-color: #6b21ff; color: white; border: none; padding: 0 30px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s;
         }
 
         /* AREA HASIL DOWNLOAD */
         #result {
-            display: none;
-            max-width: 500px;
-            margin: -30px auto 40px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            text-align: center;
-            position: relative;
-            z-index: 10;
+            display: none; max-width: 500px; margin: -30px auto 40px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 10;
         }
-        #thumb {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        #title {
-            color: #333;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        .btn-result {
-            display: block;
-            background-color: #6b21ff;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+        #thumb { width: 100%; border-radius: 8px; margin-bottom: 15px; }
+        #title { color: #333; font-size: 14px; margin-bottom: 15px; }
+        .btn-result { display: block; background-color: #6b21ff; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 10px; }
 
         /* FITUR 3 KOLOM */
-        .features-3col {
-            display: flex;
-            max-width: 1000px;
-            margin: 60px auto;
-            gap: 40px;
-            text-align: center;
-            padding: 0 20px;
-        }
-        .features-3col div {
-            flex: 1;
-        }
-        .features-3col h3 {
-            color: #1a237e;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-        .features-3col p {
-            color: #555;
-            line-height: 1.6;
-            font-size: 15px;
-        }
+        .features-3col { display: flex; max-width: 1000px; margin: 60px auto; gap: 40px; text-align: center; padding: 0 20px; }
+        .features-3col div { flex: 1; }
+        .features-3col h3 { color: #1a237e; font-size: 20px; margin-bottom: 15px; }
+        .features-3col p { color: #555; line-height: 1.6; font-size: 15px; }
 
         /* PANDUAN (HOW TO) */
-        .how-to-section {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 60px auto;
-            padding: 0 20px;
-        }
-        .how-to-section h2 {
-            color: #1a237e;
-        }
-        .how-to-section > p {
-            color: #555;
-            margin-bottom: 30px;
-        }
-        .how-to-box {
-            background-color: #6b21ff;
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: left;
-            box-shadow: 0 10px 30px rgba(107, 33, 255, 0.3);
-        }
-        .how-to-box h3 {
-            margin-top: 0;
-            font-size: 22px;
-            margin-bottom: 20px;
-        }
-        .how-to-box ol {
-            padding-left: 0;
-            list-style: none;
-            counter-reset: my-counter;
-        }
-        .how-to-box li {
-            position: relative;
-            padding-left: 40px;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-        .how-to-box li::before {
-            counter-increment: my-counter;
-            content: counter(my-counter);
-            position: absolute;
-            left: 0;
-            top: -5px;
-            font-size: 30px;
-            font-weight: bold;
-            color: rgba(255,255,255,0.3);
-        }
+        .how-to-section { text-align: center; max-width: 800px; margin: 0 auto 60px auto; padding: 0 20px; }
+        .how-to-section h2 { color: #1a237e; }
+        .how-to-section > p { color: #555; margin-bottom: 30px; }
+        .how-to-box { background-color: #6b21ff; color: white; padding: 40px; border-radius: 20px; text-align: left; box-shadow: 0 10px 30px rgba(107, 33, 255, 0.3); }
+        .how-to-box h3 { margin-top: 0; font-size: 22px; margin-bottom: 20px; }
+        .how-to-box ol { padding-left: 0; list-style: none; counter-reset: my-counter; }
+        .how-to-box li { position: relative; padding-left: 40px; margin-bottom: 20px; line-height: 1.5; }
+        .how-to-box li::before { counter-increment: my-counter; content: counter(my-counter); position: absolute; left: 0; top: -5px; font-size: 30px; font-weight: bold; color: rgba(255,255,255,0.3); }
 
-        /* FITUR GRID (6 KOTAK IKON) */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            max-width: 900px;
-            margin: 60px auto;
-            text-align: center;
-            padding: 0 20px;
-        }
-        .grid-item h4 {
-            color: #1a237e;
-            margin: 15px 0 10px 0;
-        }
-        .grid-item p {
-            color: #666;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        .icon {
-            font-size: 40px;
-        }
-
-        /* FAQ (TANYA JAWAB) */
-        .faq-section {
-            max-width: 800px;
-            margin: 0 auto 80px auto;
-            padding: 0 20px;
-        }
-        details {
-            background-color: white;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        summary {
-            padding: 20px;
-            font-weight: bold;
-            color: #1a237e;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        summary::-webkit-details-marker {
-            display: none;
-        }
-        summary::after {
-            content: "▼";
-            font-size: 12px;
-            color: #6b21ff;
-        }
-        details[open] summary::after {
-            content: "▲";
-        }
-        details p {
-            padding: 0 20px 20px 20px;
-            margin: 0;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        /* RESPONSIVE UNTUK HP */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .features-3col, .features-grid { grid-template-columns: 1fr; flex-direction: column; }
+            .features-3col { flex-direction: column; }
             .input-group { flex-direction: column; background: transparent; box-shadow: none; }
-            .input-group input, .btn-paste, .btn-download-main {
-                width: 100%;
-                margin-bottom: 10px;
-                padding: 15px;
-                border-radius: 8px;
-                box-sizing: border-box;
-            }
-            .input-group input { background: white; }
+            .input-group input, .btn-paste, .btn-download-main { width: 100%; margin-bottom: 10px; padding: 15px; border-radius: 8px; box-sizing: border-box; }
+            .input-group input { background: white; margin-right: 0; margin-left: 0; }
         }
     </style>
 </head>
-<body>
+<body dir="ltr">
 
     <div class="navbar">
-        <div class="logo">
-            <span>⬇</span> TOKSAVE
-        </div>
+        <div class="logo"><span>⬇</span> TOKSAVE</div>
         <div class="nav-links">
-            <a href="#">Download story TikTok</a>
-            <a href="#">Download TikTok MP3</a>
+            <a href="#" data-i18n="navStory">Download story TikTok</a>
+            <a href="#" data-i18n="navMp3">Download TikTok MP3</a>
         </div>
-        <button class="btn-install">⬇ Instal aplikasi</button>
+        <div class="nav-right-group">
+            <select class="lang-picker" onchange="gantiBahasa(this.value)">
+                <option value="id">🇮🇩 ID</option>
+                <option value="en">🇺🇸 EN</option>
+                <option value="ru">🇷🇺 RU</option>
+                <option value="pt">🇵🇹 PT</option>
+                <option value="ms">🇲🇾 MS</option>
+                <option value="es">🇪🇸 ES</option>
+                <option value="ar">🇸🇦 AR</option>
+            </select>
+            <button class="btn-install" data-i18n="btnInstall">⬇ Instal aplikasi</button>
+        </div>
     </div>
 
     <div class="hero">
-        <h1>Download video TikTok</h1>
+        <h1 data-i18n="heroTitle">Download video TikTok</h1>
         <div class="input-group">
-            <input type="text" id="linkInput" placeholder="Tempel tautan video di sini">
-            <button class="btn-paste" onclick="pasteClipboard()">📋 Tempel</button>
-            <button class="btn-download-main" id="searchBtn" onclick="klikTombolUtama()">Download</button>
+            <input type="text" id="linkInput" data-i18n-placeholder="inputPlaceholder" placeholder="Tempel tautan video di sini">
+            <button class="btn-paste" onclick="pasteClipboard()" data-i18n="btnPaste">📋 Tempel</button>
+            <button class="btn-download-main" id="searchBtn" onclick="klikTombolUtama()" data-i18n="btnDownload">Download</button>
         </div>
     </div>
 
     <div id="result">
-        <img id="thumb" src="" alt="Thumbnail Video">
-        <p id="title">Judul Video</p>
-        <a id="downloadBtn" href="" target="_blank" class="btn-result">Unduh Tanpa Watermark</a>
-        <a id="downloadMp3" href="" target="_blank" class="btn-result" style="background:#444;">Unduh MP3</a>
+        <img id="thumb" src="" alt="Thumbnail">
+        <p id="title">Video Title</p>
+        <a id="downloadBtn" href="" target="_blank" class="btn-result" data-i18n="resNoWatermark">Unduh Tanpa Watermark</a>
+        <a id="downloadMp3" href="" target="_blank" class="btn-result" style="background:#444;" data-i18n="resMp3">Unduh MP3 / Audio</a>
     </div>
 
+    <!-- ===== TEMPAT IKLAN BANNER (160x300) ===== -->
     <div style="text-align: center; margin: 30px auto; display: flex; justify-content: center;">
         <script>
             atOptions = {
@@ -350,87 +210,36 @@
         </script>
         <script src="https://www.highperformanceformat.com/bcad03aad9a659e4601d2270cebb6fb0/invoke.js"></script>
     </div>
+    <!-- ========================================= -->
+
     <div class="features-3col">
         <div>
-            <h3>Akses Tanpa Batas</h3>
-            <p>Nikmati kebebasan untuk download video tiktok no watermark sebanyak yang Anda inginkan, tanpa ada batasan.</p>
+            <h3 data-i18n="feat1Title">Akses Tanpa Batas</h3>
+            <p data-i18n="feat1Desc">Nikmati kebebasan untuk download video tiktok no watermark sebanyak yang Anda inginkan, tanpa ada batasan.</p>
         </div>
         <div>
-            <h3>Unduh Tanpa Watermark</h3>
-            <p>Simpan video TikTok tanpa watermark dengan mudah dan cepat, pastikan setiap clip bebas dari logo TT.</p>
+            <h3 data-i18n="feat2Title">Unduh Tanpa Watermark</h3>
+            <p data-i18n="feat2Desc">Simpan video TikTok tanpa watermark dengan mudah dan cepat, pastikan setiap clip bebas dari logo TT.</p>
         </div>
         <div>
-            <h3>MP4 dan MP3 Dalam HD</h3>
-            <p>Download tiktok tanpa watermark HD, tersedia dalam MP4 atau konversi langsung ke audio MP3.</p>
+            <h3 data-i18n="feat3Title">MP4 dan MP3 Dalam HD</h3>
+            <p data-i18n="feat3Desc">Download tiktok tanpa watermark HD, tersedia dalam MP4 atau konversi langsung ke audio MP3.</p>
         </div>
     </div>
 
     <div class="how-to-section">
-        <h2>Unduh Video TikTok online HD</h2>
-        <p>Di TokSave, kami menawarkan layanan gratis untuk unduh video TikTok tanpa watermark. Dapatkan video dengan resolusi HD dalam format MP4, dan ikuti petunjuk mudah kami.</p>
-        
+        <h2 data-i18n="howToTitle">Unduh Video TikTok online HD</h2>
         <div class="how-to-box">
-            <h3>Download video TikTok mp4 dengan gratis!</h3>
+            <h3 data-i18n="howToSub">Download video TikTok mp4 dengan gratis!</h3>
             <ol>
-                <li><strong>Temukan TT</strong><br>Buka aplikasi TikTok di perangkat seluler Anda. Gulir untuk menemukan video yang ingin Anda simpan. Putar video untuk mengonfirmasi bahwa itu adalah video yang tepat.</li>
-                <li><strong>Salin tautan</strong><br>Ketuk tombol Bagikan yang terletak di sisi kanan layar. Pilih Salin tautan dari menu. Periksa clipboard Anda untuk memastikan URL disalin dengan benar.</li>
-                <li><strong>Download Video TT</strong><br>Buka TokSave dan tempel tautan yang disalin ke dalam kolom teks di bagian atas. Klik 'Download' untuk memulai pengunduhan video.</li>
+                <li><strong data-i18n="step1Title">Temukan TT</strong><br><span data-i18n="step1Desc">Buka aplikasi TikTok. Gulir untuk menemukan video yang ingin Anda simpan.</span></li>
+                <li><strong data-i18n="step2Title">Salin tautan</strong><br><span data-i18n="step2Desc">Ketuk tombol Bagikan. Pilih Salin tautan dari menu.</span></li>
+                <li><strong data-i18n="step3Title">Download Video TT</strong><br><span data-i18n="step3Desc">Buka TokSave, tempel tautan ke kolom, lalu klik Download.</span></li>
             </ol>
         </div>
     </div>
 
-    <div class="features-grid">
-        <div class="grid-item">
-            <div class="icon">🔗</div>
-            <h4>Unduh Video TikTok</h4>
-            <p>Solusi Ideal Untuk Mengunggah Ulang Konten Online.</p>
-        </div>
-        <div class="grid-item">
-            <div class="icon">🏷️</div>
-            <h4>Tanpa Batasan</h4>
-            <p>Kamu bisa download tiktok sebanyak yang kamu mau.</p>
-        </div>
-        <div class="grid-item">
-            <div class="icon">🖼️</div>
-            <h4>Akses Instan</h4>
-            <p>Buka situs TokSave, tempelkan tautan, dan mulai mengunduh instan.</p>
-        </div>
-        <div class="grid-item">
-            <div class="icon">⚡</div>
-            <h4>Cepat & Aman</h4>
-            <p>Save from TikTok dengan kecepatan tinggi tanpa aplikasi tambahan.</p>
-        </div>
-        <div class="grid-item">
-            <div class="icon">🎵</div>
-            <h4>Ekstrak Audio</h4>
-            <p>TikTok download mp4 dengan kualitas suara jernih.</p>
-        </div>
-        <div class="grid-item">
-            <div class="icon">💻</div>
-            <h4>Semua Perangkat</h4>
-            <p>Kompatibel dengan Semua Browser, iOS, Android, dan PC.</p>
-        </div>
-    </div>
-
-    <div class="faq-section">
-        <details>
-            <summary>Di mana kamu download video TikTok tanpa watermark?</summary>
-            <p>File video yang diunduh biasanya akan tersimpan secara otomatis di folder "Downloads" (Unduhan) pada perangkat HP atau Komputer Anda.</p>
-        </details>
-        <details>
-            <summary>Apakah aplikasi TokSave video download gratis?</summary>
-            <p>Ya, layanan TokSave 100% gratis digunakan selamanya tanpa perlu mendaftar atau membayar biaya apa pun.</p>
-        </details>
-        <details>
-            <summary>Apakah saya harus membayar untuk download video TikTok HD?</summary>
-            <p>Tidak, semua video yang tersedia dalam resolusi HD dapat diunduh secara gratis melalui TokSave.</p>
-        </details>
-        <details>
-            <summary>Apakah saya perlu menginstal ekstensi?</summary>
-            <p>Tidak perlu. Anda hanya membutuhkan browser web biasa (seperti Chrome, Safari, atau Firefox) dan tautan video TikTok.</p>
-        </details>
-    </div>
-
+    <!-- Footer -->
     <footer style="text-align: center; padding: 30px 10px; margin-top: 40px; font-size: 14px; color: #6b7280; border-top: 1px solid #e5e7eb;">
         <p>&copy; 2026 TOKSAVE. All rights reserved.</p>
         <p>
@@ -440,39 +249,150 @@
     </footer>
 
     <script>
-        // Fitur tombol tempel (paste) otomatis
+        // KAMUS 7 BAHASA
+        const kamus = {
+            id: {
+                navStory: "Download story TikTok", navMp3: "Download TikTok MP3", btnInstall: "⬇ Instal aplikasi",
+                heroTitle: "Download video TikTok", inputPlaceholder: "Tempel tautan video di sini", btnPaste: "📋 Tempel", btnDownload: "Download",
+                resNoWatermark: "Unduh Tanpa Watermark", resMp3: "Unduh MP3 / Audio",
+                feat1Title: "Akses Tanpa Batas", feat1Desc: "Nikmati kebebasan download tanpa batas.",
+                feat2Title: "Unduh Tanpa Watermark", feat2Desc: "Simpan video dengan mudah, bebas logo TT.",
+                feat3Title: "MP4 & MP3 HD", feat3Desc: "Tersedia format MP4 resolusi tinggi dan MP3.",
+                howToTitle: "Cara Unduh Video HD", howToSub: "Unduh gratis dan cepat!",
+                step1Title: "Temukan Video", step1Desc: "Buka aplikasi TikTok dan cari videonya.",
+                step2Title: "Salin Tautan", step2Desc: "Klik bagikan lalu salin tautan.",
+                step3Title: "Download", step3Desc: "Tempel di TokSave dan klik download.",
+                alertEmpty: "Silakan tempelkan tautan video TikTok!", alertSearch: "Mencari... ⏳", alertFail: "Gagal menemukan video.", alertError: "Terjadi kesalahan server."
+            },
+            en: {
+                navStory: "Download TikTok Story", navMp3: "Download TikTok MP3", btnInstall: "⬇ Install App",
+                heroTitle: "Download TikTok Videos", inputPlaceholder: "Paste video link here", btnPaste: "📋 Paste", btnDownload: "Download",
+                resNoWatermark: "Download No Watermark", resMp3: "Download MP3 / Audio",
+                feat1Title: "Unlimited Access", feat1Desc: "Enjoy the freedom of unlimited downloads.",
+                feat2Title: "No Watermark", feat2Desc: "Save videos easily, completely free of TT logo.",
+                feat3Title: "HD MP4 & MP3", feat3Desc: "Available in high-resolution MP4 and audio MP3.",
+                howToTitle: "How to Download HD Videos", howToSub: "Download for free and fast!",
+                step1Title: "Find Video", step1Desc: "Open the TikTok app and find the video.",
+                step2Title: "Copy Link", step2Desc: "Click share and copy the link.",
+                step3Title: "Download", step3Desc: "Paste in TokSave and click download.",
+                alertEmpty: "Please paste the TikTok video link!", alertSearch: "Searching... ⏳", alertFail: "Failed to find video.", alertError: "Server error occurred."
+            },
+            ru: {
+                navStory: "Скачать историю TikTok", navMp3: "Скачать TikTok MP3", btnInstall: "⬇ Установить приложение",
+                heroTitle: "Скачать видео TikTok", inputPlaceholder: "Вставьте ссылку на видео", btnPaste: "📋 Вставить", btnDownload: "Скачать",
+                resNoWatermark: "Скачать без водяного знака", resMp3: "Скачать MP3",
+                feat1Title: "Безлимитный доступ", feat1Desc: "Наслаждайтесь свободой безграничных загрузок.",
+                feat2Title: "Без водяных знаков", feat2Desc: "Сохраняйте видео легко, без логотипа TT.",
+                feat3Title: "HD MP4 и MP3", feat3Desc: "Доступно в высоком разрешении MP4 и MP3.",
+                howToTitle: "Как скачать HD видео", howToSub: "Скачивайте бесплатно и быстро!",
+                step1Title: "Найдите видео", step1Desc: "Откройте приложение TikTok и найдите видео.",
+                step2Title: "Скопируйте ссылку", step2Desc: "Нажмите поделиться и скопируйте ссылку.",
+                step3Title: "Скачать", step3Desc: "Вставьте в TokSave и нажмите скачать.",
+                alertEmpty: "Пожалуйста, вставьте ссылку!", alertSearch: "Поиск... ⏳", alertFail: "Видео не найдено.", alertError: "Ошибка сервера."
+            },
+            pt: {
+                navStory: "Baixar Story do TikTok", navMp3: "Baixar TikTok MP3", btnInstall: "⬇ Instalar App",
+                heroTitle: "Baixar vídeos do TikTok", inputPlaceholder: "Cole o link do vídeo aqui", btnPaste: "📋 Colar", btnDownload: "Baixar",
+                resNoWatermark: "Baixar sem marca d'água", resMp3: "Baixar MP3",
+                feat1Title: "Acesso Ilimitado", feat1Desc: "Aproveite a liberdade de downloads ilimitados.",
+                feat2Title: "Sem Marca D'água", feat2Desc: "Salve vídeos facilmente, sem a logo do TT.",
+                feat3Title: "HD MP4 e MP3", feat3Desc: "Disponível em alta resolução MP4 e áudio MP3.",
+                howToTitle: "Como Baixar Vídeos HD", howToSub: "Baixe grátis e rápido!",
+                step1Title: "Encontre o Vídeo", step1Desc: "Abra o app do TikTok e procure o vídeo.",
+                step2Title: "Copiar Link", step2Desc: "Clique em compartilhar e copie o link.",
+                step3Title: "Baixar", step3Desc: "Cole no TokSave e clique em baixar.",
+                alertEmpty: "Por favor, cole o link do vídeo!", alertSearch: "Buscando... ⏳", alertFail: "Falha ao encontrar vídeo.", alertError: "Erro no servidor."
+            },
+            ms: {
+                navStory: "Muat turun Story TikTok", navMp3: "Muat turun TikTok MP3", btnInstall: "⬇ Pasang Aplikasi",
+                heroTitle: "Muat Turun Video TikTok", inputPlaceholder: "Tampal pautan video di sini", btnPaste: "📋 Tampal", btnDownload: "Muat Turun",
+                resNoWatermark: "Muat Turun Tanpa Watermark", resMp3: "Muat Turun MP3",
+                feat1Title: "Akses Tanpa Had", feat1Desc: "Nikmati kebebasan muat turun tanpa had.",
+                feat2Title: "Tanpa Watermark", feat2Desc: "Simpan video dengan mudah, bebas logo TT.",
+                feat3Title: "MP4 & MP3 HD", feat3Desc: "Tersedia dalam resolusi tinggi MP4 dan MP3.",
+                howToTitle: "Cara Muat Turun Video HD", howToSub: "Muat turun percuma dan pantas!",
+                step1Title: "Cari Video", step1Desc: "Buka aplikasi TikTok dan cari video.",
+                step2Title: "Salin Pautan", step2Desc: "Klik kongsi dan salin pautan.",
+                step3Title: "Muat Turun", step3Desc: "Tampal di TokSave dan klik muat turun.",
+                alertEmpty: "Sila tampal pautan video!", alertSearch: "Mencari... ⏳", alertFail: "Gagal menemui video.", alertError: "Ralat pelayan berlaku."
+            },
+            es: {
+                navStory: "Descargar Story de TikTok", navMp3: "Descargar TikTok MP3", btnInstall: "⬇ Instalar App",
+                heroTitle: "Descargar videos de TikTok", inputPlaceholder: "Pega el enlace del video aquí", btnPaste: "📋 Pegar", btnDownload: "Descargar",
+                resNoWatermark: "Descargar sin marca de agua", resMp3: "Descargar MP3",
+                feat1Title: "Acceso Ilimitado", feat1Desc: "Disfruta de la libertad de descargas ilimitadas.",
+                feat2Title: "Sin Marca de Agua", feat2Desc: "Guarda videos fácilmente, sin logo de TT.",
+                feat3Title: "HD MP4 y MP3", feat3Desc: "Disponible en alta resolución MP4 y MP3.",
+                howToTitle: "Cómo descargar videos HD", howToSub: "¡Descarga gratis y rápido!",
+                step1Title: "Encuentra el Video", step1Desc: "Abre la aplicación TikTok y busca el video.",
+                step2Title: "Copiar Enlace", step2Desc: "Haz clic en compartir y copia el enlace.",
+                step3Title: "Descargar", step3Desc: "Pega en TokSave y haz clic en descargar.",
+                alertEmpty: "¡Pega el enlace del video!", alertSearch: "Buscando... ⏳", alertFail: "No se encontró el video.", alertError: "Error del servidor."
+            },
+            ar: {
+                navStory: "تنزيل قصة تيك توك", navMp3: "تنزيل تيك توك MP3", btnInstall: "⬇ تثبيت التطبيق",
+                heroTitle: "تنزيل مقاطع فيديو تيك توك", inputPlaceholder: "الصق رابط الفيديو هنا", btnPaste: "📋 لصق", btnDownload: "تنزيل",
+                resNoWatermark: "تنزيل بدون علامة مائية", resMp3: "تنزيل MP3",
+                feat1Title: "وصول غير محدود", feat1Desc: "استمتع بحرية التنزيلات غير المحدودة.",
+                feat2Title: "بدون علامة مائية", feat2Desc: "احفظ مقاطع الفيديو بسهولة، خالية من الشعار.",
+                feat3Title: "HD MP4 و MP3", feat3Desc: "متوفر بدقة عالية MP4 وصوت MP3.",
+                howToTitle: "كيفية تنزيل مقاطع فيديو HD", howToSub: "تنزيل مجاني وسريع!",
+                step1Title: "ابحث عن الفيديو", step1Desc: "افتح تطبيق تيك توك وابحث عن الفيديو.",
+                step2Title: "انسخ الرابط", step2Desc: "انقر فوق مشاركة وانسخ الرابط.",
+                step3Title: "تنزيل", step3Desc: "الصق في TokSave وانقر فوق تنزيل.",
+                alertEmpty: "الرجاء لصق رابط الفيديو!", alertSearch: "جاري البحث... ⏳", alertFail: "فشل في العثور على الفيديو.", alertError: "حدث خطأ في الخادم."
+            }
+        };
+
+        // Simpan bahasa saat ini untuk Alert
+        let currentLang = 'id';
+
+        function gantiBahasa(lang) {
+            currentLang = lang;
+            
+            // Ubah arah teks untuk bahasa Arab (Kanan ke Kiri)
+            document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+            // Ganti teks di dalam HTML
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(kamus[lang][key]) el.innerHTML = kamus[lang][key];
+            });
+
+            // Ganti Placeholder di kotak input
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if(kamus[lang][key]) el.placeholder = kamus[lang][key];
+            });
+
+            // Ubah Title Web (Opsional biar tab browser ikutan ganti)
+            document.title = "TOKSAVE - " + kamus[lang].heroTitle;
+        }
+
         async function pasteClipboard() {
             try {
                 const text = await navigator.clipboard.readText();
                 document.getElementById('linkInput').value = text;
             } catch (err) {
-                alert('Gagal menempelkan teks otomatis. Silakan paste secara manual (Tahan & Tempel).');
+                alert('Gagal tempel / Failed to paste.');
             }
         }
 
-        // FUNGSI BARU: Nangkep klik biar lolos Popup Blocker
         function klikTombolUtama() {
             const link = document.getElementById('linkInput').value;
-            
             if (!link) {
-                alert('Silakan tempelkan tautan video TikTok terlebih dahulu!');
+                alert(kamus[currentLang].alertEmpty);
                 return;
             }
-
-            // Buka Iklan langsung (Tanpa nunggu loading, biar lolos blocker browser)
             window.open('https://www.effectivecpmnetwork.com/ww60vgea?key=3ce187645bfa68bd5b10a5b293e2180b', '_blank');
-
-            // Lanjut jalanin loading pencarian video
             cariVideoTikTok(link);
         }
 
-        // Fitur Ekstrak Video dari API
         async function cariVideoTikTok(link) {
             const resultDiv = document.getElementById('result');
             const btn = document.getElementById('searchBtn');
 
-            // Animasi loading
-            btn.innerText = 'Mencari... ⏳';
+            btn.innerText = kamus[currentLang].alertSearch;
             btn.disabled = true;
             resultDiv.style.display = 'none';
 
@@ -481,32 +401,28 @@
                 const data = await response.json();
 
                 if (data.code === 0) {
-                    // Masukkan data ke HTML
                     document.getElementById('thumb').src = data.data.cover;
                     document.getElementById('title').innerText = data.data.title;
-                    
-                    // Link Video & Audio
                     document.getElementById('downloadBtn').href = data.data.play; 
                     document.getElementById('downloadMp3').href = data.data.music; 
                     
-                    // Tampilkan kotak hasil
                     resultDiv.style.display = 'block';
-                    
-                    // Scroll otomatis ke hasil
                     resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
-                    alert('Gagal menemukan video. Pastikan tautan TikTok yang Anda masukkan benar dan akun tidak di-private.');
+                    alert(kamus[currentLang].alertFail);
                 }
             } catch (error) {
-                alert('Terjadi kesalahan saat menghubungi server. Silakan coba beberapa saat lagi.');
+                alert(kamus[currentLang].alertError);
             } finally {
-                // Kembalikan tombol seperti semula
-                btn.innerText = 'Download';
+                btn.innerText = kamus[currentLang].btnDownload;
                 btn.disabled = false;
             }
         }
     </script>
 
+    <!-- ===== SCRIPT IKLAN JS TAMBAHAN ===== -->
     <script src="https://pl29904731.effectivecpmnetwork.com/2a/cc/78/2acc783c1468717d402f4f2b18ca2787.js"></script>
-    </body>
+    <!-- ==================================== -->
+
+</body>
 </html>
