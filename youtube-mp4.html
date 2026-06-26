@@ -7,7 +7,7 @@
     <title>TOKSAVE - Download Video YouTube MP4</title>
     
     <style>
-        /* PENGATURAN DASAR (Sama persis dengan beranda) */
+        /* PENGATURAN DASAR */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f4f6;
@@ -38,10 +38,9 @@
         .nav-links a { text-decoration: none; color: #444; font-weight: 500; }
         .nav-right-group { display: flex; align-items: center; gap: 10px; }
         .lang-picker { padding: 8px; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; }
-        .btn-install { background-color: #ff0000; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
         .hero {
-            background: linear-gradient(135deg, #cc0000 0%, #ff4d4d 100%); /* Warna Merah YouTube */
+            background: linear-gradient(135deg, #cc0000 0%, #ff4d4d 100%);
             padding: 60px 20px;
             text-align: center;
             color: white;
@@ -57,7 +56,7 @@
         #iframe-container {
             display: none; max-width: 800px; margin: -30px auto 40px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 10;
         }
-        iframe { width: 100%; height: 250px; border: none; border-radius: 8px; }
+        iframe { width: 100%; height: 80px; border: none; border-radius: 8px; overflow: hidden; }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
@@ -93,10 +92,11 @@
     </div>
 
     <div id="iframe-container">
-        <h3 style="margin-top:0;" data-i18n="resTitle">Pilih Kualitas Video:</h3>
+        <h3 style="margin-top:0;" data-i18n="resTitle">Silakan klik tombol di bawah ini:</h3>
         <iframe id="downloadWidget" src="" allowtransparency="true" scrolling="no"></iframe>
     </div>
 
+    <!-- ===== TEMPAT IKLAN BANNER (160x300) ===== -->
     <div style="text-align: center; margin: 30px auto; display: flex; justify-content: center;">
         <script>
             atOptions = {
@@ -109,12 +109,13 @@
         </script>
         <script src="https://www.highperformanceformat.com/bcad03aad9a659e4601d2270cebb6fb0/invoke.js"></script>
     </div>
+    <!-- ========================================= -->
+
     <footer style="text-align: center; padding: 30px 10px; margin-top: 40px; font-size: 14px; color: #6b7280; border-top: 1px solid #e5e7eb;">
         <p>&copy; 2026 TOKSAVE.</p>
     </footer>
 
     <script>
-        // Kamus Bahasa Sederhana
         const kamus = {
             id: {
                 navBack: "⬅ Kembali ke Beranda TikTok",
@@ -122,7 +123,7 @@
                 inputPlaceholder: "Tempel tautan YouTube di sini",
                 btnPaste: "📋 Tempel",
                 btnDownload: "Download",
-                resTitle: "Pilih Resolusi Video:",
+                resTitle: "Silakan klik tombol di bawah ini:",
                 alertEmpty: "Silakan tempelkan tautan video YouTube!"
             },
             en: {
@@ -131,7 +132,7 @@
                 inputPlaceholder: "Paste YouTube link here",
                 btnPaste: "📋 Paste",
                 btnDownload: "Download",
-                resTitle: "Choose Video Resolution:",
+                resTitle: "Please click the button below:",
                 alertEmpty: "Please paste the YouTube video link!"
             },
             ar: {
@@ -140,7 +141,7 @@
                 inputPlaceholder: "الصق رابط يوتيوب هنا",
                 btnPaste: "📋 لصق",
                 btnDownload: "تنزيل",
-                resTitle: "اختر دقة الفيديو:",
+                resTitle: "الرجاء النقر فوق الزر أدناه:",
                 alertEmpty: "الرجاء لصق رابط فيديو يوتيوب!"
             }
         };
@@ -177,15 +178,14 @@
                 return;
             }
             
-            // Popunder Iklan Lu (Aman dan Tetap Jalan)
+            // Popunder Iklan
             window.open('https://www.effectivecpmnetwork.com/ww60vgea?key=3ce187645bfa68bd5b10a5b293e2180b', '_blank');
 
-            // Ekstrak ID YouTube
-            let videoId = extractVideoID(link);
-            
-            if(videoId) {
-                // Memakai widget gratisan untuk memproses download
-                const iframeUrl = `https://api.vevioz.com/api/button/mp4/${videoId}`;
+            // Cek apakah link mengandung kata youtu
+            if(link.includes('youtu')) {
+                // Menggunakan Loader.to API (Lebih stabil dan Anti-Ribet)
+                // f=mp4 artinya formatnya video mp4 (720p/1080p otomatis)
+                const iframeUrl = `https://loader.to/api/button/?url=${encodeURIComponent(link)}&f=mp4`;
                 document.getElementById('downloadWidget').src = iframeUrl;
                 
                 const resultDiv = document.getElementById('iframe-container');
@@ -194,12 +194,6 @@
             } else {
                 alert(currentLang === 'id' ? 'Link YouTube tidak valid!' : 'Invalid YouTube Link!');
             }
-        }
-
-        function extractVideoID(url) {
-            let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-            let match = url.match(regExp);
-            return (match && match[2].length === 11) ? match[2] : null;
         }
     </script>
 
