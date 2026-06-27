@@ -150,12 +150,19 @@
         .how-to-box li { position: relative; padding-left: 40px; margin-bottom: 20px; line-height: 1.5; }
         .how-to-box li::before { counter-increment: my-counter; content: counter(my-counter); position: absolute; left: 0; top: -5px; font-size: 30px; font-weight: bold; color: rgba(255,255,255,0.3); }
 
+        /* KODE INI YANG GUA UBAH BIAR SIMETRIS DI HP */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .features-3col { flex-direction: column; }
             .input-group { flex-direction: column; background: transparent; box-shadow: none; }
-            .input-group input, .btn-paste, .btn-download-main { width: 100%; margin-bottom: 10px; padding: 15px; border-radius: 8px; box-sizing: border-box; }
-            .input-group input { background: white; margin-right: 0; margin-left: 0; }
+            .input-group input, .btn-paste, .btn-download-main { 
+                width: 100%; 
+                margin: 0 0 10px 0 !important; 
+                padding: 15px; 
+                border-radius: 8px; 
+                box-sizing: border-box; 
+            }
+            .input-group input { background: white; }
         }
     </style>
 </head>
